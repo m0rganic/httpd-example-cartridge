@@ -1,0 +1,36 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source $OPENSHIFT_MOCK_DIR/mock.conf
+
+function start {
+  /usr/sbin/httpd -f $OPENSHIFT_HTTPD_DIR/etc/httpd.conf -k start
+}
+
+function stop {
+  /usr/sbin/httpd -f $OPENSHIFT_HTTPD_DIR/etc/httpd.conf -k stop
+}
+
+function restart {
+  /usr/sbin/httpd -f $OPENSHIFT_HTTPD_DIR/etc/httpd.conf -k start
+}
+
+function catchall {
+  echo "not implemented yet"
+}
+
+case "$1" in
+  start)                start ;;
+  stop)                 stop ;;
+  restart)              restart ;;
+  status)               status ;;
+  reload)               catchall ;;
+  tidy)                 catchall ;;
+  pre-build)            catchall ;;
+  build)                catchall ;;
+  deploy)               catchall ;;
+  post-deploy)          catchall ;;
+  *)           exit 0
+esac
+
+exit 0
